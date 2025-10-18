@@ -1,6 +1,9 @@
 import List from "./components/List";
+import { useSelector, useDispatch } from "react-redux";
+import { addItem, removeItem } from "./store/slices/itemsSlice.js";
 
 function App() {
+  const items = useSelector((state) => state.items);
   return (
     <>
       <h1 className="title">todo</h1>
