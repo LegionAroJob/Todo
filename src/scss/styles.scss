@@ -19,9 +19,12 @@ body {
 
 .title {
   padding-top: 50px;
+  max-width: fit-content;
   text-align: center;
   text-transform: uppercase;
-  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  margin: 0 auto 30px auto;
 }
 
 .list {
@@ -41,6 +44,8 @@ body {
     font-weight: bold;
     margin-bottom: 5px;
     text-transform: uppercase;
+    display: flex;
+    align-items: center;
   }
 
   &__item {
