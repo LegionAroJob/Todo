@@ -1,35 +1,22 @@
-import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   editTitleItem,
   removeItem,
   isCompletedItem,
 } from "../store/slices/itemsSlice.js";
+import InputTile from "./ui/InputTile.jsx";
 
 const ListItem = ({ item }) => {
-  const [todoInput, setTodoInput] = useState(item.title);
-  const [debouncedValue, setDebouncedValue] = useState(item.title);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(todoInput);
-    }, 500);
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [todoInput]);
-
-  useEffect(() => {
-    dispatch(editTitleItem({ id: item.id, title: debouncedValue }));
-  }, [debouncedValue]);
 
   function handleRemove() {
     dispatch(removeItem({ id: item.id }));
   }
   function handleCompleted() {
     dispatch(isCompletedItem({ id: item.id }));
+  }
+  function handleEditTitle(newTitle) {
+    dispatch(editTitleItem({ id: item.id, title: newTitle }));
   }
   return (
     <div className="list__item">
@@ -42,12 +29,7 @@ const ListItem = ({ item }) => {
           ✅
         </button>
       )}
-
-      <input
-        onChange={(e) => setTodoInput(e.target.value)}
-        className="list__item-title"
-        value={todoInput}
-      />
+      <InputTile title={item.title} handleEditTitle={handleEditTitle} />
       <button className="list__item-btn">?</button>
       <button onClick={handleRemove} className="list__item-btn">
         -

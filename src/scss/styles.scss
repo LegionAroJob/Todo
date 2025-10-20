@@ -8,14 +8,15 @@ body {
   font-family: sans-serif;
   background-color: #f0f0f0;
   color: #333;
+  padding: 0 10px;
 }
 
-.container {
-  width: 100%;
-  max-width: 768px;
-  padding: 0 20px;
-  margin: 0 auto;
-}
+// .container {
+//   width: 100%;
+//   max-width: 768px;
+//   padding: 0 20px;
+//   margin: 0 auto;
+// }
 
 .title {
   padding-top: 50px;
@@ -34,6 +35,7 @@ body {
 
   &__wrapper {
     margin-bottom: 20px;
+    max-width: 788px;
     &:last-child {
       margin-bottom: 0;
     }
