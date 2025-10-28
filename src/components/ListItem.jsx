@@ -4,7 +4,8 @@ import {
   removeItem,
   isCompletedItem,
 } from "../store/slices/itemsSlice.js";
-import InputTile from "./ui/InputTile.jsx";
+import { checkIcon, editIcon, deleteIcon } from "../assets/uiIcons.jsx";
+import InputTile from "./ui/InputName.jsx";
 
 const ListItem = ({ item }) => {
   const dispatch = useDispatch();
@@ -19,21 +20,29 @@ const ListItem = ({ item }) => {
     dispatch(editTitleItem({ id: item.id, title: newTitle }));
   }
   return (
-    <div className="list__item">
-      {item.completed ? (
-        <button onClick={handleCompleted} className="list__item-btn">
-          ❌
+    <div className="list__item --hover-visible">
+      <div className="list__item-info">
+        <button
+          onClick={handleCompleted}
+          className={`list__item-btn list__item-btn-check ${
+            item.completed ? "list__item-btn--completed" : ""
+          }`}
+        >
+          {checkIcon}
         </button>
-      ) : (
-        <button onClick={handleCompleted} className="list__item-btn">
-          ✅
+        <InputTile
+          title={item.title}
+          handleEditTitle={handleEditTitle}
+          classes={"list__item-title"}
+        />
+      </div>
+
+      <div className="list__item-info">
+        <button className="list__item-btn --hidden">{editIcon}</button>
+        <button onClick={handleRemove} className="list__item-btn --hidden">
+          {deleteIcon}
         </button>
-      )}
-      <InputTile title={item.title} handleEditTitle={handleEditTitle} />
-      <button className="list__item-btn">?</button>
-      <button onClick={handleRemove} className="list__item-btn">
-        -
-      </button>
+      </div>
     </div>
   );
 };
